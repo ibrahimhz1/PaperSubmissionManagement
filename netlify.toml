@@ -1,0 +1,12 @@
+# Netlify configuration at monorepo root
+# This tells Netlify to use the client/ directory as the base
+[build]
+  base = "client"
+  command = "npm run build"
+  publish = "dist"
+
+# Single Page App redirects: send all routes to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
