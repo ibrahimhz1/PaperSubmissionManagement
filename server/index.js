@@ -26,9 +26,16 @@ app.use(morgan('dev'));
 const apiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 app.use('/api', apiLimiter);
 
-// Health check
+// Health checks (support both /health and /healthz)
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', uptime: process.uptime() });
+});
+app.get('/healthz', (req, res) => {
+  res.json({ status: 'ok', uptime: process.uptime() });
+});
+// Optional root ping
+app.get('/', (req, res) => {
+  res.send('OK');
 });
 
 // Routes
