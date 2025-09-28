@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+/dist/
+/.cache/
+/.vite/
+/coverage/
+/.parcel-cache/
+/.turbo/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+.eslintcache
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Platform
+.netlify/
+.vercel/
+*.local
