@@ -26,17 +26,30 @@ export default function Login(){
   }
 
   return (
-    <div className="card" style={{ maxWidth: '28rem', margin: '2rem auto' }}>
-      <h1 className="section-title" style={{fontSize:'1.25rem'}}>Login</h1>
+    <div className="max-w-md mx-auto bg-white border border-gray-100 rounded-xl shadow-sm p-6 mt-8">
+      <h1 className="text-lg font-semibold mb-4">Login</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-        <input className="w-full" placeholder="Email" {...register('email')} />
+        <input
+          type="email"
+          autoComplete="email"
+          inputMode="email"
+          autoCapitalize="none"
+          spellCheck={false}
+          className="block w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 leading-6 shadow-none focus:outline focus:outline-2 focus:outline-blue-100 focus:border-blue-600"
+          placeholder="Email"
+          {...register('email')}
+        />
         {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
-        <input type="password" className="w-full" placeholder="Password" {...register('password')} />
-        {errors.password && <p className="text-red-600 text-sm">{errors.password.message}</p>}
-        <button disabled={isSubmitting} className="btn btn-primary" style={{width:'100%'}}>{isSubmitting? 'Signing in...':'Login'}</button>
-        <div className="text-sm" style={{display:'flex', justifyContent:'space-between'}}>
-          <Link to="/register">Create account</Link>
-          <Link to="/forgot-password">Forgot password?</Link>
+        <input
+          type="password"
+          className="block w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 leading-6 shadow-none focus:outline focus:outline-2 focus:outline-blue-100 focus:border-blue-600"
+          placeholder="Password"
+          {...register('password')}
+        />
+        <button disabled={isSubmitting} className="w-full inline-flex items-center justify-center font-medium rounded-lg px-4 py-2 no-underline transition bg-blue-600 text-white hover:bg-blue-700">{isSubmitting? 'Signing in...':'Login'}</button>
+        <div className="text-sm flex justify-between">
+          <Link to="/register" className="text-blue-700">Create account</Link>
+          <Link to="/forgot-password" className="text-blue-700">Forgot password?</Link>
         </div>
       </form>
     </div>

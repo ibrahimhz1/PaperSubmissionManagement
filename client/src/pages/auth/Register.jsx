@@ -17,19 +17,26 @@ export default function Register(){
   }
 
   return (
-    <div className="max-w-md mx-auto">
-      <h1 className="text-xl font-semibold mb-4">Register</h1>
+    <div className="max-w-md mx-auto bg-white border border-gray-100 rounded-xl shadow-sm p-6 mt-8">
+      <h1 className="text-lg font-semibold mb-4">Register</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-        <input className="w-full border px-3 py-2 rounded" placeholder="Email" {...register('email')} />
+        <input className="block w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 leading-6 shadow-none focus:outline focus:outline-2 focus:outline-blue-100 focus:border-blue-600" placeholder="Email" {...register('email')} />
         {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
-        <input type="password" className="w-full border px-3 py-2 rounded" placeholder="Password" {...register('password')} />
+        <input type="password" className="block w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 leading-6 shadow-none focus:outline focus:outline-2 focus:outline-blue-100 focus:border-blue-600" placeholder="Password" {...register('password')} />
         {errors.password && <p className="text-red-600 text-sm">{errors.password.message}</p>}
-        <select className="w-full border px-3 py-2 rounded" {...register('role')}>
+        <select className="block w-full bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 leading-6 shadow-none focus:outline focus:outline-2 focus:outline-blue-100 focus:border-blue-600" {...register('role')}>
           <option value="Author">Author</option>
           <option value="Reviewer">Reviewer</option>
         </select>
         {errors.role && <p className="text-red-600 text-sm">{errors.role.message}</p>}
-        <button disabled={isSubmitting} className="w-full bg-blue-600 text-white py-2 rounded">{isSubmitting? 'Submitting...':'Register'}</button>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full inline-flex items-center justify-center font-medium rounded-lg px-4 py-2 no-underline transition bg-blue-600 text-white hover:bg-blue-700 border border-blue-600 disabled:opacity-60"
+          style={{ backgroundColor: '#2563eb', color: '#ffffff', borderColor: '#2563eb' }}
+        >
+          {isSubmitting? 'Submitting...':'Register'}
+        </button>
       </form>
     </div>
   )
