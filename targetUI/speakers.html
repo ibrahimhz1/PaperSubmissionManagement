@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakers - Research Paper Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-600: #2563eb;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-600: #4b5563;
+            --gray-900: #111827;
+            --white: #ffffff;
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background-color: var(--white);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .justify-center {
+            justify-content: center;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .grid {
+            display: grid;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--gray-900);
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary-600);
+            margin-right: 0.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-600);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-600);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-600);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-600);
+            border: 1px solid var(--primary-600);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-50);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-600);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-600);
+            cursor: pointer;
+        }
+        
+        /* Button Styles */
+        .btn-lg {
+            padding: 0.75rem 2rem;
+            font-size: 1.125rem;
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--gray-100);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Speakers Section */
+        .speakers {
+            background-color: var(--gray-50);
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            max-width: 48rem;
+            margin: 0 auto 4rem;
+        }
+        
+        .speakers-grid {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2rem;
+        }
+        
+        .speaker-card {
+            text-align: center;
+        }
+        
+        .speaker-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: var(--gray-100);
+            margin: 0 auto 1rem;
+        }
+        
+        .speaker-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .speaker-title {
+            color: var(--primary-600);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+        
+        .speaker-bio {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+        
+        .speaker-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .speaker-social-link {
+            color: var(--gray-600);
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+        
+        .speaker-social-link:hover {
+            color: var(--primary-600);
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: var(--gray-900);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-icon {
+            font-size: 2rem;
+            color: var(--primary-600);
+            margin-right: 0.5rem;
+        }
+        
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-description {
+            color: var(--gray-100);
+            margin-bottom: 1.5rem;
+            max-width: 300px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-600);
+            transform: translateY(-2px);
+        }
+        
+        .footer-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-link a {
+            color: var(--gray-100);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: var(--primary-600);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            color: var(--gray-100);
+        }
+        
+        .contact-icon {
+            margin-right: 0.75rem;
+            color: var(--primary-600);
+            margin-top: 0.25rem;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--gray-100);
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-bottom-link {
+            color: var(--gray-100);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-bottom-link:hover {
+            color: var(--primary-600);
+        }
+        
+        .copyright {
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 640px) {
+            .speakers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .speakers-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .speakers-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-menu, .auth-buttons {
+                display: none;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .auth-buttons.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="animate-fade-in">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="logo-icon fas fa-book-open"></i>
+                <span class="logo-text">RPMS</span>
+            </a>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="speakers.html" class="nav-link active">Speakers</a></li>
+                    <li><a href="committee.html" class="nav-link">Committee</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons" id="authButtons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Speakers Section -->
+    <section class="speakers">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Our Esteemed Speakers</h2>
+                <p class="section-description">
+                    Meet the distinguished researchers and academics sharing their insights and expertise.
+                </p>
+            </div>
+
+            <div class="speakers-grid grid">
+                <div class="card speaker-card">
+                    <div class="speaker-image"></div>
+                    <h3 class="speaker-name">Dr. John Smith</h3>
+                    <p class="speaker-title">Professor of Computer Science</p>
+                    <p class="speaker-bio">
+                        Expert in artificial intelligence and machine learning with over 20 years of research experience.
+                    </p>
+                    <div class="speaker-social-links">
+                        <a href="#" class="speaker-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="speaker-social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="card speaker-card">
+                    <div class="speaker-image"></div>
+                    <h3 class="speaker-name">Dr. Emily Johnson</h3>
+                    <p class="speaker-title">Professor of Biomedical Engineering</p>
+                    <p class="speaker-bio">
+                        Renowned for her work in medical imaging and bioinformatics, published in top-tier journals.
+                    </p>
+                    <div class="speaker-social-links">
+                        <a href="#" class="speaker-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="speaker-social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="card speaker-card">
+                    <div class="speaker-image"></div>
+                    <h3 class="speaker-name">Dr. Michael Chen</h3>
+                    <p class="speaker-title">Professor of Environmental Science</p>
+                    <p class="speaker-bio">
+                        Leading researcher in climate change and sustainable systems with multiple award-winning publications.
+                    </p>
+                    <div class="speaker-social-links">
+                        <a href="#" class="speaker-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="speaker-social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="card speaker-card">
+                    <div class="speaker-image"></div>
+                    <h3 class="speaker-name">Dr. Sarah Patel</h3>
+                    <p class="speaker-title">Professor of Economics</p>
+                    <p class="speaker-bio">
+                        Specialist in behavioral economics and data analysis, known for her innovative research methodologies.
+                    </p>
+                    <div class="speaker-social-links">
+                        <a href="#" class="speaker-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="speaker-social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="footer-logo-icon fas fa-book-open"></i>
+                        <span class="footer-logo-text">RPMS</span>
+                    </div>
+                    <p class="footer-description">
+                        Streamline your academic workflow with our comprehensive platform for paper submission, 
+                        peer review, and publication management.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="index.html">Home</a></li>
+                        <li class="footer-link"><a href="about.html">About Us</a></li>
+                        <li class="footer-link"><a href="speakers.html">Speakers</a></li>
+                        <li class="footer-link"><a href="committee.html">Committee</a></li>
+                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="blog.html">Blog</a></li>
+                        <li class="footer-link"><a href="help.html">Help Center</a></li>
+                        <li class="footer-link"><a href="faq.html">FAQ</a></li>
+                        <li class="footer-link"><a href="documentation.html">Documentation</a></li>
+                        <li class="footer-link"><a href="support.html">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <ul class="contact-info">
+                        <li class="contact-item">
+                            <i class="contact-icon fas fa-map-marker-alt"></i>
+                            <span>123 University Ave, Academic City, AC 12345</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="contact-icon fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="contact-icon fas fa-envelope"></i>
+                            <span>info@rpms.com</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="contact-icon fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-links">
+                    <a href="privacy.html" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="terms.html" class="footer-bottom-link">Terms of Service</a>
+                    <a href="cookies.html" class="footer-bottom-link">Cookie Policy</a>
+                </div>
+                <p class="copyright">&copy; 2023 Research Paper Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            const authButtons = document.getElementById('authButtons');
+            
+            navMenu.classList.toggle('active');
+            authButtons.classList.toggle('active');
+            
+            // Change icon
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                const navMenu = document.getElementById('navMenu');
+                const authButtons = document.getElementById('authButtons');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                const icon = mobileMenuBtn.querySelector('i');
+                
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    authButtons.classList.remove('active');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Simple animation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-fade-in');
+            });
+        });
+    </script>
+</body>
+</html>

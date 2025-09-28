@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Research Paper Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-600: #2563eb;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-600: #4b5563;
+            --gray-900: #111827;
+            --white: #ffffff;
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background-color: var(--white);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .justify-center {
+            justify-content: center;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .grid {
+            display: grid;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--gray-900);
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary-600);
+            margin-right: 0.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-600);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-600);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-600);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-600);
+            border: 1px solid var(--primary-600);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-50);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-600);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-600);
+            cursor: pointer;
+        }
+        
+        /* Button Styles */
+        .btn-lg {
+            padding: 0.75rem 2rem;
+            font-size: 1.125rem;
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--gray-100);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-50) 0%, var(--white) 50%, var(--primary-50) 100%);
+            padding: 4rem 0;
+        }
+        
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* About Content */
+        .about-content {
+            padding: 5rem 0;
+        }
+        
+        .about-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .about-text {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-image {
+            width: 100%;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            margin-bottom: 3rem;
+        }
+        
+        /* Mission & Vision */
+        .mission-vision {
+            background-color: var(--gray-50);
+            padding: 5rem 0;
+        }
+        
+        .mission-vision-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .mission-card, .vision-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .mission-icon, .vision-icon {
+            font-size: 3rem;
+            color: var(--primary-600);
+            margin-bottom: 1.5rem;
+        }
+        
+        .mission-title, .vision-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .mission-text, .vision-text {
+            color: var(--gray-600);
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 5rem 0;
+        }
+        
+        .team-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--primary-100);
+        }
+        
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-role {
+            color: var(--primary-600);
+            margin-bottom: 1rem;
+        }
+        
+        .team-bio {
+            color: var(--gray-600);
+        }
+        
+        /* Values Section */
+        .values {
+            background-color: var(--primary-600);
+            color: var(--white);
+            padding: 5rem 0;
+        }
+        
+        .values-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .value-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .value-text {
+            color: var(--primary-100);
+        }
+        
+        /* CTA Section */
+        .cta {
+            background-color: var(--gray-50);
+            padding: 5rem 0;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: var(--gray-900);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-icon {
+            font-size: 2rem;
+            color: var(--primary-600);
+            margin-right: 0.5rem;
+        }
+        
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-description {
+            color: var(--gray-100);
+            margin-bottom: 1.5rem;
+            max-width: 300px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-600);
+            transform: translateY(-2px);
+        }
+        
+        .footer-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-link a {
+            color: var(--gray-100);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: var(--primary-600);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            color: var(--gray-100);
+        }
+        
+        .contact-icon {
+            margin-right: 0.75rem;
+            color: var(--primary-600);
+            margin-top: 0.25rem;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--gray-100);
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-bottom-link {
+            color: var(--gray-100);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-bottom-link:hover {
+            color: var(--primary-600);
+        }
+        
+        .copyright {
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 640px) {
+            .cta-buttons {
+                flex-direction: row;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+            
+            .mission-vision-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-menu, .auth-buttons {
+                display: none;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .auth-buttons.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="animate-fade-in">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="logo-icon fas fa-book-open"></i>
+                <span class="logo-text">RPMS</span>
+            </a>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link active">About</a></li>
+                    <li><a href="speakers.html" class="nav-link">Speakers</a></li>
+                    <li><a href="committee.html" class="nav-link">Committee</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons" id="authButtons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">About Us</h1>
+            <p class="page-subtitle">Learn more about our mission, vision, and the team behind the Research Paper Management System</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-grid grid">
+                <div>
+                    <h2 class="section-title">Our Story</h2>
+                    <p class="about-text">
+                        Founded in 2018, the Research Paper Management System (RPMS) was born out of a need to streamline the academic publication process. Our founders, experienced researchers and academics themselves, recognized the challenges faced by scholars, reviewers, and publishers in managing the complex workflow of research paper submission, review, and publication.
+                    </p>
+                    <p class="about-text">
+                        What started as a small project to help a few university departments has grown into a comprehensive platform used by researchers, academic institutions, and publishers worldwide. Today, we serve over 50 universities and facilitate the publication of thousands of research papers annually.
+                    </p>
+                    <p class="about-text">
+                        Our commitment to innovation and excellence has made us a trusted partner in the academic community, helping to advance knowledge dissemination through efficient and reliable paper management solutions.
+                    </p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Team collaboration" class="about-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mission-vision-grid grid">
+                <div class="card mission-card">
+                    <i class="mission-icon fas fa-bullseye"></i>
+                    <h3 class="mission-title">Our Mission</h3>
+                    <p class="mission-text">
+                        To revolutionize academic publishing by providing an intuitive, efficient, and transparent platform that simplifies the research paper management process for authors, reviewers, and publishers worldwide.
+                    </p>
+                </div>
+                <div class="card vision-card">
+                    <i class="vision-icon fas fa-eye"></i>
+                    <h3 class="vision-title">Our Vision</h3>
+                    <p class="vision-text">
+                        To become the global standard for research paper management, fostering collaboration and accelerating the dissemination of knowledge across all academic disciplines.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <div class="container">
+            <div class="text-center mb-16">
+                <h2 class="section-title" style="color: white;">Our Values</h2>
+                <p class="section-description" style="color: var(--primary-100);">The principles that guide everything we do</p>
+            </div>
+            
+            <div class="values-grid grid">
+                <div class="value-card">
+                    <i class="value-icon fas fa-shield-alt"></i>
+                    <h3 class="value-title">Integrity</h3>
+                    <p class="value-text">We maintain the highest standards of ethical conduct and transparency in all our operations.</p>
+                </div>
+                <div class="value-card">
+                    <i class="value-icon fas fa-lightbulb"></i>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-text">We continuously evolve our platform to meet the changing needs of the academic community.</p>
+                </div>
+                <div class="value-card">
+                    <i class="value-icon fas fa-users"></i>
+                    <h3 class="value-title">Collaboration</h3>
+                    <p class="value-text">We believe in the power of teamwork and partnership to achieve shared goals.</p>
+                </div>
+                <div class="value-card">
+                    <i class="value-icon fas fa-graduation-cap"></i>
+                    <h3 class="value-title">Excellence</h3>
+                    <p class="value-text">We strive for the highest quality in every aspect of our platform and services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Meet Our Team</h2>
+                <p class="section-description">The dedicated professionals behind RPMS</p>
+            </div>
+            
+            <div class="team-grid grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Dr. Sarah Johnson" class="team-photo">
+                    <h3 class="team-name">Dr. Sarah Johnson</h3>
+                    <p class="team-role">Founder & CEO</p>
+                    <p class="team-bio">Former professor of Computer Science with 15+ years of experience in academic publishing.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Michael Chen" class="team-photo">
+                    <h3 class="team-name">Michael Chen</h3>
+                    <p class="team-role">CTO</p>
+                    <p class="team-bio">Software architect with expertise in building scalable academic platforms.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Dr. Elena Rodriguez" class="team-photo">
+                    <h3 class="team-name">Dr. Elena Rodriguez</h3>
+                    <p class="team-role">Head of Research</p>
+                    <p class="team-bio">PhD in Information Science with extensive experience in academic workflow optimization.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="David Kim" class="team-photo">
+                    <h3 class="team-name">David Kim</h3>
+                    <p class="team-role">Product Manager</p>
+                    <p class="team-bio">Focused on user experience and ensuring our platform meets researcher needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container text-center">
+            <h2 class="section-title">
+                Join Our Academic Community
+            </h2>
+            <p class="section-description">
+                Become part of the growing network of researchers, reviewers, and institutions using RPMS.
+            </p>
+            <div class="cta-buttons">
+                <a href="register.html" class="btn btn-primary btn-lg">
+                    Get Started Today
+                </a>
+                <a href="contact.html" class="btn btn-outline btn-lg">
+                    Contact Our Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="footer-logo-icon fas fa-book-open"></i>
+                        <span class="footer-logo-text">RPMS</span>
+                    </div>
+                    <p class="footer-description">
+                        Streamline your academic workflow with our comprehensive platform for paper submission, 
+                        peer review, and publication management.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="index.html">Home</a></li>
+                        <li class="footer-link"><a href="about.html">About Us</a></li>
+                        <li class="footer-link"><a href="speakers.html">Speakers</a></li>
+                        <li class="footer-link"><a href="committee.html">Committee</a></li>
+                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="blog.html">Blog</a></li>
+                        <li class="footer-link"><a href="help.html">Help Center</a></li>
+                        <li class="footer-link"><a href="faq.html">FAQ</a></li>
+                        <li class="footer-link"><a href="documentation.html">Documentation</a></li>
+                        <li class="footer-link"><a href="support.html">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <ul class="contact-info">
+                        <li class="contact-item">
+                            <i class="contact-icon fas fa-map-marker-alt"></i>
+                            <span>123 University Ave, Academic City, AC 12345</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="contact-icon fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="contact-icon fas fa-envelope"></i>
+                            <span>info@rpms.com</span>
+                        </li>
+                        <li class="contact-item">
+                            <i class="contact-icon fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-links">
+                    <a href="privacy.html" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="terms.html" class="footer-bottom-link">Terms of Service</a>
+                    <a href="cookies.html" class="footer-bottom-link">Cookie Policy</a>
+                </div>
+                <p class="copyright">&copy; 2023 Research Paper Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            const authButtons = document.getElementById('authButtons');
+            
+            navMenu.classList.toggle('active');
+            authButtons.classList.toggle('active');
+            
+            // Change icon
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                const navMenu = document.getElementById('navMenu');
+                const authButtons = document.getElementById('authButtons');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                const icon = mobileMenuBtn.querySelector('i');
+                
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    authButtons.classList.remove('active');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Simple animation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-fade-in');
+            });
+        });
+    </script>
+</body>
+</html>
