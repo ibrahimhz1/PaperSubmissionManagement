@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import TargetLayout from './components/TargetLayout.jsx'
-import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
-import Contact from './pages/Contact.jsx'
+import Home from './pages/public/Home.jsx'
+import About from './pages/public/About.jsx'
+import Contact from './pages/public/Contact.jsx'
 import Login from './pages/auth/Login.jsx'
 import Register from './pages/auth/Register.jsx'
 import RegisterAdmin from './pages/auth/RegisterAdmin.jsx'
@@ -13,6 +13,9 @@ import AuthorDashboard from './pages/author/AuthorDashboard.jsx'
 import ReviewerDashboard from './pages/reviewer/ReviewerDashboard.jsx'
 import AdminDashboard from './pages/admin/AdminDashboard.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import CallForPapers from './pages/public/CallForPapers.jsx'
+import Committee from './pages/public/Committee.jsx'
+import Speakers from './pages/public/Speakers.jsx'
 
 export default function App() {
   return (
@@ -21,6 +24,9 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="call-for-papers" element={<CallForPapers />} />
+        <Route path="committee" element={<Committee />} />
+        <Route path="speakers" element={<Speakers />} />
 
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

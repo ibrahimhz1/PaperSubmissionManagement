@@ -32,6 +32,9 @@ export default function TargetLayout(){
             <ul className="nav-menu" id="navMenu">
               <li><NavLink to="/" className={({isActive})=> `nav-link ${isActive? 'active':''}`}>Home</NavLink></li>
               <li><NavLink to="/about" className={({isActive})=> `nav-link ${isActive? 'active':''}`}>About</NavLink></li>
+              <li><NavLink to="/call-for-papers" className={({isActive})=> `nav-link ${isActive? 'active':''}`}>Call for Papers</NavLink></li>
+              <li><NavLink to="/speakers" className={({isActive})=> `nav-link ${isActive? 'active':''}`}>Speakers</NavLink></li>
+              <li><NavLink to="/committee" className={({isActive})=> `nav-link ${isActive? 'active':''}`}>Committee</NavLink></li>
               <li><NavLink to="/contact" className={({isActive})=> `nav-link ${isActive? 'active':''}`}>Contact</NavLink></li>
               {user && dashboardPath && (
                 <li><NavLink to={dashboardPath} className={({isActive})=> `nav-link ${isActive? 'active':''}`}>Dashboard</NavLink></li>
